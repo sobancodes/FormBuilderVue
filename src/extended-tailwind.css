@@ -1,0 +1,15 @@
+._defaults {
+    @apply p-4 mx-auto
+}
+
+._default_grid {
+    @apply flex -mx-4 mb-4
+}
+
+._default_inputs {
+    @apply mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-1.5 placeholder:text-gray-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600
+}
+
+._tab_active {
+    @apply bg-white shadow-sm
+}
