@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="max-w-sm xs-mobile:w-[320px] mx-auto">
+    <div class="max-w-sm xs-mobile:w-[240px] mobile:w-[280px] sm:w-[300px] lg:w-[420px] mx-auto">
         <highlightjs :code="code" />
     </div>
 </template>
