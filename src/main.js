@@ -1,9 +1,12 @@
 import { createApp } from 'vue'
+import 'material-symbols'
+
+import 'animate.css'
 import './normalize.css'
 import './style.css'
-import './extended-tailwind.css'
-import 'animate.css'
 import './animate-overhaul.css'
+import './extended-tailwind.css'
+
 import App from './App.vue'
 
 // Prism.js for code highlight
