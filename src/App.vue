@@ -1,13 +1,18 @@
 <script setup>
 import CodeTabs from './components/main/CodeTabs.vue';
-import FormBuilder from './components/main/FormBuilder.vue'
+import FormBuilderContainer from './components/main/FormBuilderContainer.vue';
 import SupportedInputs from './components/main/SupportedInputs.vue'
 
 import { ref } from 'vue'
-let clickedInput = ref({})
-function pushSelectedElement(input) {
-    clickedInput.value = input
+
+const pushNewInput = ref(0)
+let newInput = ref(null)
+
+function pushNewInputElement(input) {
+    pushNewInput.value += 1
+    newInput.value = input
 }
+
 </script>
 
 <template>
@@ -18,8 +23,8 @@ function pushSelectedElement(input) {
                 <CodeTabs />
             </div>
             <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:px-8 lg:px-12">
-                <SupportedInputs @onClick="pushSelectedElement" />
-                <FormBuilder :formElement="clickedInput" />
+                <SupportedInputs @onClick="pushNewInputElement" />
+                <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" />
             </div>
         </div>
     </div>
