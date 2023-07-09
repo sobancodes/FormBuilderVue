@@ -2,7 +2,7 @@
 import Tabs from './../application/Tabs.vue'
 import ScriptCode from './ScriptCode.vue'
 import TemplateCode from './TemplateCode.vue'
-import { reactive } from 'vue';
+import { reactive } from 'vue'
 
 const tabs = reactive({
     options: [

@@ -7,6 +7,6 @@
         <input type="text"
             disabled
             class="_default_inputs"
-            placeholder="John Doe" />
+            placeholder="Text Input" />
     </div>
 </template>
