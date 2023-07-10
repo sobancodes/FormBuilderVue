@@ -1,6 +1,8 @@
 <script setup>
 import FormBuilder from './FormBuilder.vue'
-import { watch, reactive, onMounted } from 'vue'
+import { watch, reactive, defineEmits } from 'vue'
+// import { useInput } from './../../composables/useInput'
+const emits = defineEmits(['newInput'])
 
 const props = defineProps({
     pushCounter: Number,
@@ -21,7 +23,11 @@ function createNewBuilder(index) {
 }
 
 function pushNewInput(index) {
-    formBuilders[index].push(props.input)
+    if (props.input != null) {
+        formBuilders[index].push(props.input)
+    }
+
+    emits('newInput')
 }
 
 </script>

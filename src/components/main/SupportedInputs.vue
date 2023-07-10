@@ -1,19 +1,15 @@
 <script setup>
 
-const inputs = [
-    {
-        label: 'Input',
-        icon: 'dynamic_form'
-    },
-    {
-        label: 'Email',
-        icon: 'mail'
-    },
-    {
-        label: 'Password',
-        icon: 'password'
-    }
+import { useInput } from './../../composables/useInput'
+
+const { simpleInput, email, password } = useInput()
+
+let inputs = [
+    simpleInput,
+    email,
+    password
 ]
+
 </script>
 
 <template>
@@ -23,8 +19,7 @@ const inputs = [
 
     <div class="py-5 px-3 supported-inputs">
         <div class="_default_grid mx-3 flex-wrap">
-            <button v-for="input in inputs" :key="input.label"
-                @click="$emit('onClick', input)" type="button"
+            <button v-for="input in inputs" :key="input.label" @click="$emit('onClick', input)" type="button"
                 class="flex border space-x-1 px-4 py-1 rounded-md mx-1 xs-mobile:my-2.5 sm:my-1">
                 <span class="material-symbols-outlined">{{ input.icon }}</span>
                 <span>{{ input.label }}</span>

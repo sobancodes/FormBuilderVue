@@ -29,11 +29,11 @@ const inputs = reactive(props.formInputs)
         </button>
 
         <span @click="$emit('pushNewInput')"
-            class="hidden addRowIcon text-sm text-white absolute material-symbols-outlined -right-[15px] top-1/2 cursor-pointer bg-blue-600 rounded-r-3xl -translate-y-1/2 animate__animated animate__fadeIn animate__fastest">
+            class="w-5 text-center hidden addRowIcon text-sm text-white absolute material-symbols-outlined -right-[30px] top-1/2 cursor-pointer bg-blue-600 rounded-md -translate-y-1/2 animate__animated animate__fadeIn animate__fastest">
             add
         </span>
         <span @click="$emit('pushNewBuilder')"
-            class="w-5 text-center hidden addBuilderIcon text-sm text-white absolute material-symbols-outlined -bottom-[15px] left-1/2 cursor-pointer bg-blue-600 rounded-b-3xl -translate-x-1/2 animate__animated animate__fadeIn animate__fastest">
+            class="w-5 text-center hidden addBuilderIcon text-sm text-white absolute material-symbols-outlined -bottom-[15px] left-1/2 cursor-pointer bg-blue-600 rounded-md -translate-x-1/2 animate__animated animate__fadeIn animate__fastest">
             add
         </span>
     </div>
