@@ -24,7 +24,7 @@ function createNewBuilder(index) {
 
 function pushNewInput(index) {
     if (props.input != null) {
-        formBuilders[index].push(props.input)
+        return formBuilders[index].push(props.input)
     }
 
     emits('newInput')
