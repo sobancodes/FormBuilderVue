@@ -24,8 +24,15 @@ const inputs = reactive(props.formInputs)
             </template>
         </div>
 
-        <button class="mb-4 px-2 flex items-center space-x-2 cursor-pointer" @click="$emit('pushNewInput')" v-else>
-            <span class="text-sm font-bold">add text input</span>
+        <button
+            class="border-gray-300 font-light border text-gray-700 rounded-md mb-4 px-4 py-1.5 flex items-center space-x-1 cursor-pointer"
+            @click="$emit('pushNewInput')" v-else>
+            <span class="material-symbols-outlined">
+                add_circle
+            </span>
+            <span>
+                Add new input
+            </span>
         </button>
 
         <span @click="$emit('pushNewInput')"
