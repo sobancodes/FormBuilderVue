@@ -14,7 +14,7 @@ const inputs = reactive(props.formInputs)
 
 <template>
     <!-- hover:border-blue-600 -->
-    <div class="formBuilder relative w-full pt-4 border-2 border-transparent rounded transition-all">
+    <div class="formBuilder relative w-full border-2 border-transparent rounded transition-all">
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
             <template v-for="formInput in inputs" :key="formInput.label">
@@ -29,11 +29,11 @@ const inputs = reactive(props.formInputs)
         </button>
 
         <span @click="$emit('pushNewInput')"
-            class="w-5 text-center hidden addRowIcon text-sm text-white absolute material-symbols-outlined -right-[30px] top-1/2 cursor-pointer bg-blue-600 rounded-md -translate-y-1/2 animate__animated animate__fadeIn animate__fastest">
+            class="w-5 text-center hidden addRowIcon text-sm text-white absolute material-symbols-outlined -right-[10px] top-1/2 cursor-pointer bg-blue-600 rounded-md -translate-y-1/2 animate__animated animate__fadeIn animate__fastest">
             add
         </span>
         <span @click="$emit('pushNewBuilder')"
-            class="w-5 text-center hidden addBuilderIcon text-sm text-white absolute material-symbols-outlined -bottom-[15px] left-1/2 cursor-pointer bg-blue-600 rounded-md -translate-x-1/2 animate__animated animate__fadeIn animate__fastest">
+            class="w-5 text-center hidden addBuilderIcon text-sm text-white absolute material-symbols-outlined bottom-0 left-1/2 cursor-pointer bg-blue-600 rounded-md -translate-x-1/2 animate__animated animate__fadeIn animate__fastest">
             add
         </span>
     </div>

@@ -32,7 +32,7 @@ function pushNewInput(index) {
 
 </script>
 <template>
-    <div class="flex flex-col">
+    <div class="flex flex-col pt-4">
         <FormBuilder v-for="(formBuilder, index) in formBuilders" :key="index" :formInputs="formBuilder"
             :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index)" />
     </div>
