@@ -17,10 +17,10 @@ const inputs = reactive(props.formInputs)
     <div class="formBuilder relative w-full border-2 border-transparent rounded transition-all">
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
-            <template v-for="formInput in inputs" :key="formInput.label">
-                <SimpleInput class="w-full" v-if="formInput.label === 'Input'" />
-                <Email class="w-full" v-else-if="formInput.label === 'Email'" />
-                <Password class="w-full" v-else-if="formInput.label === 'Password'" />
+            <template v-for="formInput in inputs" :key="formInput.type">
+                <SimpleInput class="w-full" v-if="formInput.type === 'Input'" />
+                <Email class="w-full" v-else-if="formInput.type === 'Email'" />
+                <Password class="w-full" v-else-if="formInput.type === 'Password'" />
             </template>
         </div>
 
