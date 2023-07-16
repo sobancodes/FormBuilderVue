@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useNode } from './../../composables/useNode'
+import { useSibling } from './../../composables/useSibling'
+const { getSiblingByClass } = useSibling()
 
 defineProps({
     label: String,
@@ -11,9 +12,7 @@ const emits = defineEmits(['onLabelUpdate'])
 const showUpdateInput = function (e) {
     const node = e.target
 
-    const { getNextSibling } = useNode()
-
-    let nextSibling = getNextSibling(node, 'update-input-holder')
+    const nextSibling = getSiblingByClass(node, 'update-input-holder')
 
     if (nextSibling === null) {
         return
@@ -25,9 +24,15 @@ const showUpdateInput = function (e) {
 
 const lb = ref('')
 const onceLabelUpdates = function (e) {
+    if (lb.trim() === '') {
+        return
+    }
+
     emits('onLabelUpdate', lb)
 
-    const updateInputHolder = e.target.closest('update-input-holder')
+    const updateInputHolder = e.target.closest('.update-input-holder')
+    updateInputHolder.classList.remove('flex')
+    updateInputHolder.classList.add('hidden')
 }
 </script>
 
