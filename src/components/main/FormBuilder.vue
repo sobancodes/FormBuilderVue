@@ -11,6 +11,10 @@ const props = defineProps({
 })
 
 const inputs = reactive(props.formInputs)
+
+const updateLabel = function (label, input) {
+    input.label = label.value
+}
 </script>
 
 <template>
@@ -19,13 +23,16 @@ const inputs = reactive(props.formInputs)
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
             <template v-for="formInput in inputs" :key="formInput.type">
-                <InputHolder :label="formInput.label" v-if="formInput.type === 'Input'">
+                <InputHolder :label="formInput.label" v-if="formInput.type === 'Input'"
+                    @onLabelUpdate="updateLabel($event, formInput)">
                     <SimpleInput class="w-full" />
                 </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Email'">
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Email'"
+                    @onLabelUpdate="updateLabel($event, formInput)">
                     <Email class="w-full" />
                 </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Password'">
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Password'"
+                    @onLabelUpdate="updateLabel($event, formInput)">
                     <Password class="w-full" />
                 </InputHolder>
             </template>

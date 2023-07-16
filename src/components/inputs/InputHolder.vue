@@ -22,13 +22,13 @@ const showUpdateInput = function (e) {
     nextSibling.classList.add('flex')
 }
 
-const lb = ref('')
+const newLabel = ref('')
 const onceLabelUpdates = function (e) {
-    if (lb.trim() === '') {
+    if (newLabel.value.trim() === '') {
         return
     }
 
-    emits('onLabelUpdate', lb)
+    emits('onLabelUpdate', newLabel)
 
     const updateInputHolder = e.target.closest('.update-input-holder')
     updateInputHolder.classList.remove('flex')
@@ -37,7 +37,7 @@ const onceLabelUpdates = function (e) {
 </script>
 
 <template>
-    <div class="px-1 space-y-1 w-full label-container">
+    <div class="p-1 space-y-1 w-full label-container">
         <label class="relative">
             {{ label }}
             <span @click="showUpdateInput"
@@ -45,7 +45,7 @@ const onceLabelUpdates = function (e) {
                 edit
             </span>
             <div class="hidden update-input-holder absolute left-0 top-[-0.3rem] rounded space-x-1">
-                <input v-model="lb" class="outline-none" type="text">
+                <input v-model="newLabel" class="outline-none" type="text">
                 <span @click="onceLabelUpdates"
                     class="cursor-pointer material-symbols-outlined items-center text-green-600 text-lg font-bold">
                     done

@@ -1,11 +1,11 @@
 <script setup>
-
 import { useInput } from './../../composables/useInput'
 
-const { simpleInput, email, password } = useInput()
+const { text, email, password, makeNewInput } = useInput()
+
 
 let inputs = [
-    simpleInput,
+    text,
     email,
     password
 ]
