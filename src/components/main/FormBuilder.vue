@@ -3,6 +3,7 @@
 import SimpleInput from './../inputs/SimpleInput.vue'
 import Email from './../inputs/Email.vue'
 import Password from './../inputs/Password.vue'
+import InputHolder from '../inputs/InputHolder.vue'
 import { reactive } from 'vue'
 
 const props = defineProps({
@@ -18,9 +19,15 @@ const inputs = reactive(props.formInputs)
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
             <template v-for="formInput in inputs" :key="formInput.type">
-                <SimpleInput class="w-full" v-if="formInput.type === 'Input'" />
-                <Email class="w-full" v-else-if="formInput.type === 'Email'" />
-                <Password class="w-full" v-else-if="formInput.type === 'Password'" />
+                <InputHolder :label="formInput.label" v-if="formInput.type === 'Input'">
+                    <SimpleInput class="w-full" />
+                </InputHolder>
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Email'">
+                    <Email class="w-full" />
+                </InputHolder>
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Password'">
+                    <Password class="w-full" />
+                </InputHolder>
             </template>
         </div>
 
