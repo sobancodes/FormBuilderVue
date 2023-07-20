@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import 'material-symbols'
 
 import 'animate.css'
@@ -16,4 +17,5 @@ import 'highlight.js/styles/atom-one-dark.css'
 
 createApp(App)
     .use(hljsVuePlugin)
+    .use(createPinia())
     .mount('#app')

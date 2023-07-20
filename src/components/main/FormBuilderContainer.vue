@@ -1,9 +1,11 @@
 <script setup>
+const emits = defineEmits(['newInput'])
 import FormBuilder from './FormBuilder.vue'
 import { watch, reactive, defineEmits, ref, onMounted } from 'vue'
 import { useInput } from '../../composables/useInput';
 const { makeNewInput } = useInput()
-const emits = defineEmits(['newInput'])
+import { useCodeStore } from './../../stores/CodeStore'
+const codeStore = useCodeStore()
 
 const props = defineProps({
     pushCounter: Number,
@@ -33,7 +35,6 @@ function pushNewInput(index) {
 
     emits('newInput')
 }
-
 </script>
 <template>
     <div class="flex flex-col">
