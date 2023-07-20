@@ -4,14 +4,16 @@ import FormBuilderContainer from './components/main/FormBuilderContainer.vue';
 import SupportedInputs from './components/main/SupportedInputs.vue'
 import { useInput } from './composables/useInput'
 
-const { simpleInput } = useInput()
 import { ref } from 'vue'
 
 const pushNewInput = ref(0)
 let newInput = ref(null)
 
+const { text, makeNewInput } = useInput()
+const simpleInput = text
+
 function pushNewInputElement(input) {
-    newInput.value = input
+    newInput.value = makeNewInput(input)
     pushNewInput.value += 1
 }
 

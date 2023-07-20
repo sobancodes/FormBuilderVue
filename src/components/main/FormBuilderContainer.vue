@@ -1,7 +1,8 @@
 <script setup>
 import FormBuilder from './FormBuilder.vue'
-import { watch, reactive, defineEmits } from 'vue'
-// import { useInput } from './../../composables/useInput'
+import { watch, reactive, defineEmits, ref, onMounted } from 'vue'
+import { useInput } from '../../composables/useInput';
+const { makeNewInput } = useInput()
 const emits = defineEmits(['newInput'])
 
 const props = defineProps({
@@ -14,17 +15,20 @@ watch(() => props.pushCounter, () => {
     formBuilders[length - 1].push(props.input)
 })
 
+const newInput = ref(null)
+watch(() => props.input, (newValue) => newInput.value = makeNewInput(newValue))
+
 let formBuilders = reactive([
     []
 ])
 
-function createNewBuilder(index) {
-    formBuilders.push([props.input])
+function createNewBuilder() {
+    formBuilders.push([makeNewInput(newInput.value)])
 }
 
 function pushNewInput(index) {
-    if (props.input != null) {
-        formBuilders[index].push(props.input)
+    if (newInput.value != null) {
+        return formBuilders[index].push(makeNewInput(newInput.value))
     }
 
     emits('newInput')
@@ -34,6 +38,6 @@ function pushNewInput(index) {
 <template>
     <div class="flex flex-col">
         <FormBuilder v-for="(formBuilder, index) in formBuilders" :key="index" :formInputs="formBuilder"
-            :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index)" />
+            :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder" @pushNewInput="pushNewInput(index)" />
     </div>
 </template>
