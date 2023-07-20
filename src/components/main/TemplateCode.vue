@@ -1,6 +1,6 @@
 <script setup>
 import CodeHighlighter from './CodeHighlighter.vue'
-const code = `console.log('Hello World')`
+const code = `<h1>Hello World!</h1>`
 </script>
 
 <template>
