@@ -1,10 +1,11 @@
 <script setup>
-// components
 import SimpleInput from './../inputs/SimpleInput.vue'
 import Email from './../inputs/Email.vue'
 import Password from './../inputs/Password.vue'
 import InputHolder from '../inputs/InputHolder.vue'
 import { reactive } from 'vue'
+
+const emits = defineEmits(['onLabelUpdate'])
 
 const props = defineProps({
     formInputs: Object,
@@ -14,6 +15,7 @@ const inputs = reactive(props.formInputs)
 
 const updateLabel = function (label, input) {
     input.label = label.value
+    emits('onLabelUpdate', input.label)
 }
 </script>
 
@@ -23,15 +25,15 @@ const updateLabel = function (label, input) {
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
             <template v-for="formInput in inputs" :key="formInput.type">
-                <InputHolder :label="formInput.label" v-if="formInput.type === 'Input'"
+                <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
                     @onLabelUpdate="updateLabel($event, formInput)">
                     <SimpleInput class="w-full" />
                 </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Email'"
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'email'"
                     @onLabelUpdate="updateLabel($event, formInput)">
                     <Email class="w-full" />
                 </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'Password'"
+                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'password'"
                     @onLabelUpdate="updateLabel($event, formInput)">
                     <Password class="w-full" />
                 </InputHolder>

@@ -1,22 +1,19 @@
 <script setup>
+import { ref } from 'vue'
 import CodeTabs from './components/main/CodeTabs.vue';
 import FormBuilderContainer from './components/main/FormBuilderContainer.vue';
 import SupportedInputs from './components/main/SupportedInputs.vue'
-import { useInput } from './composables/useInput'
-
-import { ref } from 'vue'
+import { useObject } from './composables/useObject'
+const { cloneObject } = useObject()
 
 const pushNewInput = ref(0)
 let newInput = ref(null)
 
-const { text, makeNewInput } = useInput()
-const simpleInput = text
-
 function pushNewInputElement(input) {
-    newInput.value = makeNewInput(input)
+    newInput.value = new Object()
+    newInput.value = cloneObject(input, newInput.value)
     pushNewInput.value += 1
 }
-
 </script>
 
 <template>
@@ -28,8 +25,7 @@ function pushNewInputElement(input) {
             </div>
             <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:px-8 lg:px-12">
                 <SupportedInputs @onClick="pushNewInputElement" />
-                <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput"
-                    @newInput="pushNewInputElement(simpleInput)" />
+                <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" />
             </div>
         </div>
     </div>

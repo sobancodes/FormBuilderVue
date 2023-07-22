@@ -2,39 +2,34 @@
 const emits = defineEmits(['newInput'])
 import FormBuilder from './FormBuilder.vue'
 import { watch, reactive, defineEmits, ref, onMounted } from 'vue'
-import { useInput } from '../../composables/useInput';
-const { makeNewInput } = useInput()
+import { useInputGenerator } from './../../composables/useInputGenerator'
+const { generateInput } = useInputGenerator()
 
 const props = defineProps({
     pushCounter: Number,
     input: Object,
 })
 
-watch(() => props.pushCounter, () => {
-    const length = formBuilders.length
-    formBuilders[length - 1].push(props.input)
-})
-
-const newInput = ref(null)
-watch(() => props.input, (newValue) => {
-    newInput.value = makeNewInput(newValue)
-})
-
-let formBuilders = reactive([
-    []
-])
+watch(() => props.pushCounter, () => pushAtEnd(props.input))
+let formBuilders = reactive([[]])
 
 function createNewBuilder() {
-    formBuilders.push([makeNewInput(newInput.value)])
+    formBuilders.push([generateInput(props.input)])
 }
 
 function pushNewInput(index) {
-    if (newInput.value != null) {
-        formBuilders[index].push(makeNewInput(newInput.value))
+    if (props.input != null) {
+        return formBuilders[index].push(generateInput(props.input))
     }
 
-    emits('newInput')
+    pushAtEnd(generateInput())
 }
+
+function pushAtEnd(input) {
+    const length = formBuilders.length
+    formBuilders[length - 1].push(input)
+}
+
 </script>
 <template>
     <div class="flex flex-col">
