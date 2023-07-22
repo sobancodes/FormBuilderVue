@@ -4,8 +4,6 @@ import FormBuilder from './FormBuilder.vue'
 import { watch, reactive, defineEmits, ref, onMounted } from 'vue'
 import { useInput } from '../../composables/useInput';
 const { makeNewInput } = useInput()
-import { useCodeStore } from './../../stores/CodeStore'
-const codeStore = useCodeStore()
 
 const props = defineProps({
     pushCounter: Number,
@@ -18,7 +16,9 @@ watch(() => props.pushCounter, () => {
 })
 
 const newInput = ref(null)
-watch(() => props.input, (newValue) => newInput.value = makeNewInput(newValue))
+watch(() => props.input, (newValue) => {
+    newInput.value = makeNewInput(newValue)
+})
 
 let formBuilders = reactive([
     []
@@ -30,7 +30,7 @@ function createNewBuilder() {
 
 function pushNewInput(index) {
     if (newInput.value != null) {
-        return formBuilders[index].push(makeNewInput(newInput.value))
+        formBuilders[index].push(makeNewInput(newInput.value))
     }
 
     emits('newInput')

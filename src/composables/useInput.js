@@ -4,9 +4,6 @@ export function useInput() {
         icon: 'dynamic_form',
         code: `<input type='text' name='##name##' placeholder='##placeholder##' v-model="##v-model##" class='mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-2 placeholder:text-gray-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600'  />`,
         label: 'Input',
-        name: '',
-        value: '',
-        placeholder: '',
     }
 
     const email = {
@@ -14,9 +11,6 @@ export function useInput() {
         icon: 'mail',
         code: `<input type='email' name='##name##' placeholder='##placeholder##' v-model="##v-model##" class='mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-2 placeholder:text-gray-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600'  />`,
         label: 'Email',
-        name: '',
-        value: '',
-        placeholder: '',
     }
 
     const password = {
@@ -24,9 +18,6 @@ export function useInput() {
         icon: 'password',
         code: `<input type='password' name='##name##' placeholder='##placeholder##' v-model="##v-model##" class='mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-2 placeholder:text-gray-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600'  />`,
         label: 'Password',
-        name: '',
-        value: '',
-        placeholder: '',
     }
 
     const makeNewInput = function (input) {
