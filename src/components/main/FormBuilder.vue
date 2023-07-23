@@ -13,9 +13,9 @@ const props = defineProps({
 
 const inputs = reactive(props.formInputs)
 
-const updateLabel = function (label, input) {
-    input.label = label.value
-    emits('onLabelUpdate', input.label)
+const handleLabelUpdate = function (label, { formInput, index }) {
+    formInput.label = label.value
+    emits('onLabelUpdate', { formInputLabel: formInput.label, formInputIndex: index })
 }
 </script>
 
@@ -24,17 +24,17 @@ const updateLabel = function (label, input) {
     <div class="formBuilder relative w-full border-2 border-transparent rounded transition-all">
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
-            <template v-for="formInput in inputs" :key="formInput.type">
+            <template v-for="(formInput, index) in inputs" :key="formInput.type">
                 <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
-                    @onLabelUpdate="updateLabel($event, formInput)">
+                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                     <SimpleInput class="w-full" />
                 </InputHolder>
                 <InputHolder :label="formInput.label" v-else-if="formInput.type === 'email'"
-                    @onLabelUpdate="updateLabel($event, formInput)">
+                    @onLabelUpdate="handleLabelUpdate($event, formInput)">
                     <Email class="w-full" />
                 </InputHolder>
                 <InputHolder :label="formInput.label" v-else-if="formInput.type === 'password'"
-                    @onLabelUpdate="updateLabel($event, formInput)">
+                    @onLabelUpdate="handleLabelUpdate($event, formInput)">
                     <Password class="w-full" />
                 </InputHolder>
             </template>

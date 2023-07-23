@@ -14,6 +14,10 @@ function pushNewInputElement(input) {
     newInput.value = cloneObject(input, newInput.value)
     pushNewInput.value += 1
 }
+
+function updatedCode(codeInputMeta) {
+    console.log(codeInputMeta)
+}
 </script>
 
 <template>
@@ -25,7 +29,7 @@ function pushNewInputElement(input) {
             </div>
             <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:px-8 lg:px-12">
                 <SupportedInputs @onClick="pushNewInputElement" />
-                <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" />
+                <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" @codeUpdated="updatedCode" />
             </div>
         </div>
     </div>
