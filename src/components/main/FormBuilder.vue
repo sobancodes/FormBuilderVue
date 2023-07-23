@@ -3,7 +3,7 @@ import SimpleInput from './../inputs/SimpleInput.vue'
 import Email from './../inputs/Email.vue'
 import Password from './../inputs/Password.vue'
 import InputHolder from '../inputs/InputHolder.vue'
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
 
 const emits = defineEmits(['onLabelUpdate'])
 
@@ -11,7 +11,8 @@ const props = defineProps({
     formInputs: Object,
 })
 
-const inputs = reactive(props.formInputs)
+let inputs = reactive(props.formInputs)
+watch(() => props.formInputs, (newValue) => inputs = newValue)
 
 const handleLabelUpdate = function (label, { formInput, index }) {
     formInput.label = label.value

@@ -17,13 +17,14 @@ let formBuilders = reactive([[]])
 function createNewBuilder(formBuilderIndex) {
     let input = generateInput(props.input)
     input = updateInputCode(input, formBuilderIndex)
-    formBuilders.push([input])
+    formBuilders.splice(formBuilderIndex + 1, 0, [input])
 }
 
 function pushNewInput(formBuilderIndex) {
     if (props.input != null) {
         let input = generateInput(props.input)
         input = updateInputCode(input, formBuilderIndex, formBuilders[formBuilderIndex].length)
+        console.log(formBuilders[formBuilderIndex])
         return formBuilders[formBuilderIndex].push(input)
     }
 
