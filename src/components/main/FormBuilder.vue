@@ -26,40 +26,40 @@ const handleLabelUpdate = function (label, { formInput, index }) {
         <!-- row -->
         <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
             <template v-for="(formInput, index) in inputs" :key="formInput.type">
-                <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
-                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
-                    <SimpleInput class="w-full" />
-                </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'email'"
-                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
-                    <Email class="w-full" />
-                </InputHolder>
-                <InputHolder :label="formInput.label" v-else-if="formInput.type === 'password'"
-                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
-                    <Password class="w-full" />
-                </InputHolder>
+                <div class="relative flex-grow">
+                    <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
+                        @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
+                        <SimpleInput class="w-full" />
+                    </InputHolder>
+                    <InputHolder :label="formInput.label" v-else-if="formInput.type === 'email'"
+                        @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
+                        <Email class="w-full" />
+                    </InputHolder>
+                    <InputHolder :label="formInput.label" v-else-if="formInput.type === 'password'"
+                        @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
+                        <Password class="w-full" />
+                    </InputHolder>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-5 h-5 absolute right-3 bottom-3 text-purple-700 cursor-pointer"
+                        @click="$emit('pushNewInput', { index })">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                    </svg>
+                </div>
             </template>
         </div>
 
         <button
-            class="border-gray-300 font-light border text-gray-700 rounded-md mb-4 px-4 py-1.5 flex items-center space-x-1 cursor-pointer"
+            class="bg-purple-50 text-purple-700 font-light rounded-md mb-4 px-4 py-2 flex items-center space-x-1 cursor-pointer"
             @click="$emit('pushNewInput')" v-else>
-            <span class="material-symbols-outlined">
-                add_circle
-            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+
             <span>
                 Add new input
             </span>
         </button>
-
-        <span @click="$emit('pushNewInput')"
-            class="w-5 text-center hidden addRowIcon text-sm text-white absolute material-symbols-outlined -right-[10px] top-1/2 cursor-pointer bg-blue-600 rounded-md -translate-y-1/2 animate__animated animate__fadeIn animate__fastest">
-            add
-        </span>
-        <span @click="$emit('pushNewBuilder')"
-            class="w-5 text-center hidden addBuilderIcon text-sm text-white absolute material-symbols-outlined bottom-0 left-1/2 cursor-pointer bg-blue-600 rounded-md -translate-x-1/2 animate__animated animate__fadeIn animate__fastest">
-            add
-        </span>
     </div>
 </template>
 

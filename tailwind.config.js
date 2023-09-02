@@ -13,6 +13,9 @@ export default {
       screens: {
         'xs-mobile': '250px',
         'mobile': '320px',
+      },
+      colors: {
+        
       }
     },
   },
