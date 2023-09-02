@@ -34,7 +34,8 @@ function onTabClick(tab) {
         <Tabs @onTabClick="onTabClick" :tabs="tabs" class="inline-flex items-center m-3" />
     </div>
     <!-- template code -->
-    <TemplateCode class="animate__animated animate__fadeInUp animate__fastest" v-if="tabs.selected === 'template'" />
+    <TemplateCode :updateCode="props.updateCode" :formBuilders="props.formBuilders"
+        class="animate__animated animate__fadeInUp animate__fastest" v-if="tabs.selected === 'template'" />
     <!-- script code -->
     <ScriptCode :updateCode="props.updateCode" :formBuilders="props.formBuilders"
         class="animate__animated animate__fadeInUp animate__fastest" v-else />
