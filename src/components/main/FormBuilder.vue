@@ -31,11 +31,11 @@ const handleLabelUpdate = function (label, { formInput, index }) {
                     <SimpleInput class="w-full" />
                 </InputHolder>
                 <InputHolder :label="formInput.label" v-else-if="formInput.type === 'email'"
-                    @onLabelUpdate="handleLabelUpdate($event, formInput)">
+                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                     <Email class="w-full" />
                 </InputHolder>
                 <InputHolder :label="formInput.label" v-else-if="formInput.type === 'password'"
-                    @onLabelUpdate="handleLabelUpdate($event, formInput)">
+                    @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                     <Password class="w-full" />
                 </InputHolder>
             </template>

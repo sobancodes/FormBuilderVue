@@ -2,7 +2,12 @@
 import Tabs from './../application/Tabs.vue'
 import ScriptCode from './ScriptCode.vue'
 import TemplateCode from './TemplateCode.vue'
-import { reactive } from 'vue'
+import { reactive, watch } from 'vue'
+
+const props = defineProps({
+    formBuilders: Array,
+    updateCode: Number,
+})
 
 const tabs = reactive({
     options: [
@@ -31,5 +36,6 @@ function onTabClick(tab) {
     <!-- template code -->
     <TemplateCode class="animate__animated animate__fadeInUp animate__fastest" v-if="tabs.selected === 'template'" />
     <!-- script code -->
-    <ScriptCode class="animate__animated animate__fadeInUp animate__fastest" v-else />
+    <ScriptCode :updateCode="props.updateCode" :formBuilders="props.formBuilders"
+        class="animate__animated animate__fadeInUp animate__fastest" v-else />
 </template>

@@ -45,7 +45,8 @@ function updateInputCode(input, formBuilderIndex, formInputIndex = 0, action = '
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
     input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
     input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
-    emits('codeUpdated', { input, formBuilderIndex, action })
+    input.name = inputIdentifier
+    setTimeout(() => emits('codeUpdated', { input, formBuilderIndex, action, formBuilders })) // wait for formBuilders to get updated
     return input
 }
 
