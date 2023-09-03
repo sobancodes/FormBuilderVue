@@ -3,7 +3,7 @@ import SimpleInput from './../inputs/SimpleInput.vue'
 import Email from './../inputs/Email.vue'
 import Password from './../inputs/Password.vue'
 import InputHolder from '../inputs/InputHolder.vue'
-import { reactive, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
 const emits = defineEmits(['onLabelUpdate'])
 
@@ -11,8 +11,13 @@ const props = defineProps({
     formInputs: Object,
 })
 
-let inputs = reactive(props.formInputs)
-watch(() => props.formInputs, (newValue) => inputs = newValue)
+let inputs = reactive([])
+let formInputKey = ref(0)
+
+watch(() => props.formInputs, (newValue) => {
+    inputs = newValue
+    formInputKey.value += 1
+}, { immediate: true, deep: true })
 
 const handleLabelUpdate = function (label, { formInput, index }) {
     formInput.label = label.value
@@ -24,9 +29,9 @@ const handleLabelUpdate = function (label, { formInput, index }) {
     <!-- hover:border-blue-600 -->
     <div class="formBuilder relative w-full border-2 border-transparent rounded transition-all">
         <!-- row -->
-        <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
-            <template v-for="(formInput, index) in inputs" :key="formInput.type">
-                <div class="relative flex-grow">
+        <div class="builder-row flex flex-col w-full" v-if="inputs.length >= 1">
+            <template v-for="(formInput, index) in inputs" :key="formInputKey">
+                <div class="relative">
                     <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
                         @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                         <SimpleInput class="w-full" />
@@ -41,7 +46,7 @@ const handleLabelUpdate = function (label, { formInput, index }) {
                     </InputHolder>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5 absolute right-3 bottom-3 text-purple-700 cursor-pointer"
-                        @click="$emit('pushNewInput', { index })">
+                        @click="$emit('pushNewInput', index + 1)">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>
                 </div>
@@ -50,7 +55,7 @@ const handleLabelUpdate = function (label, { formInput, index }) {
 
         <button
             class="bg-purple-50 text-purple-700 font-light rounded-md mb-4 px-4 py-2 flex items-center space-x-1 cursor-pointer"
-            @click="$emit('pushNewInput')" v-else>
+            @click="$emit('pushNewInput', 0)" v-else>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                 class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

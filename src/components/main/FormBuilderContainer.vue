@@ -14,51 +14,39 @@ const props = defineProps({
 watch(() => props.pushCounter, () => pushAtEnd(props.input))
 let formBuilders = reactive([])
 
-function addNewElement(index) {
-    // let input = generateInput(props.input)
-    // input = updateInputCode(input, index)
-    // formBuilders.splice(index + 1, 0, input)
-}
-
 function pushNewInput(index) {
-    if (props.input != null) {
-        let input = generateInput(props.input)
-        input = updateInputCode(input, index)
-        formBuilders.splice(index + 1, 0, input)
-    }
-
-    pushAtEnd(generateInput())
+    let input = props.input != null ? props.input : null
+    input = generateInput()
+    input = updateInputCode(input, index)
+    formBuilders.splice(index, 0, input)
 }
 
 function pushAtEnd(input) {
-    // const length = formBuilders.length
-    // const formBuilderIndex = length - 1
-    // input = updateInputCode(input, formBuilderIndex, formBuilders[formBuilderIndex].length)
+    input = updateInputCode(input, formBuilders.length)
     formBuilders.push(input)
 }
 
-function updateInputCode(input, formInputIndex = 0, action = 'create') {
-    // input.generatedNode = input.template
-    // const prefix = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
-    // const inputIdentifier = `${prefix}_${formInputIndex}`
-    // input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
-    // input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
-    // input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
-    // input.name = inputIdentifier
+function updateInputCode(input, formInputIndex, action = 'create') {
+    input.generatedNode = input.template
+    const prefix = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
+    const inputIdentifier = `${prefix}_${formInputIndex}`
+    input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
+    input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
+    input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
+    input.name = inputIdentifier
     // setTimeout(() => emits('codeUpdated', { input, action, formBuilders })) // wait for formBuilders to get updated
-    // return input
+    return input
 }
 
-function labelUpdated({ formInputLabel, formInputIndex }, formBuilderIndex) {
-    // let formBuilder = formBuilders[formBuilderIndex]
-    // let input = formBuilder[formInputIndex]
-    // input.label = formInputLabel
-    // updateInputCode(input, formBuilderIndex, formInputIndex, 'update')
+function labelUpdated({ formInputLabel, formInputIndex }) {
+    let input = formBuilders[formInputIndex]
+    input.label = formInputLabel
+    updateInputCode(input, formInputIndex, 'update')
 }
 </script>
 <template>
     <div class="flex flex-col">
-        <FormBuilder :formInputs="formBuilders" :pushCounter="pushCounter" @pushNewBuilder="pushNewInput(index)"
-            @pushNewInput="pushNewInput(index)" @onLabelUpdate="labelUpdated($event, index)" />
+        <FormBuilder :formInputs="formBuilders" :pushCounter="pushCounter" @pushNewInput="pushNewInput"
+            @onLabelUpdate="labelUpdated($event)" />
     </div>
 </template>

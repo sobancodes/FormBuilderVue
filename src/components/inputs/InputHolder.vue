@@ -1,13 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useSibling } from './../../composables/useSibling'
 const { getSiblingByClass } = useSibling()
 
-defineProps({
+const props = defineProps({
     label: String,
 })
 
 const emits = defineEmits(['onLabelUpdate'])
+
+const newLabel = ref('')
 
 const showUpdateInput = function (e) {
     const node = e.target
@@ -22,7 +24,6 @@ const showUpdateInput = function (e) {
     nextSibling.classList.add('flex')
 }
 
-const newLabel = ref('')
 const onceLabelUpdates = function (e) {
     if (newLabel.value.trim() === '') {
         return
