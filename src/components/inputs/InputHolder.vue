@@ -1,13 +1,15 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useSibling } from './../../composables/useSibling'
 const { getSiblingByClass } = useSibling()
 
-defineProps({
+const props = defineProps({
     label: String,
 })
 
 const emits = defineEmits(['onLabelUpdate'])
+
+const newLabel = ref('')
 
 const showUpdateInput = function (e) {
     const node = e.target
@@ -22,7 +24,6 @@ const showUpdateInput = function (e) {
     nextSibling.classList.add('flex')
 }
 
-const newLabel = ref('')
 const onceLabelUpdates = function (e) {
     if (newLabel.value.trim() === '') {
         return
@@ -41,7 +42,7 @@ const onceLabelUpdates = function (e) {
         <label class="relative">
             {{ label }}
             <span @click="showUpdateInput"
-                class="font-bold cursor-pointer label-edit-icon text-base absolute -translate-y-1/2 top-1/2 right-[-22px] text-purple-400 material-symbols-outlined animate__animated animate__fadeIn animate__fastest">
+                class="font-bold cursor-pointer label-edit-icon text-base absolute -translate-y-1/2 top-1/2 right-[-22px] text-purple-700 material-symbols-outlined animate__animated animate__fadeIn animate__fastest">
                 edit
             </span>
             <div class="hidden update-input-holder absolute left-0 top-[-0.3rem] rounded space-x-1">
