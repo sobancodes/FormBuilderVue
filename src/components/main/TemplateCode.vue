@@ -9,17 +9,20 @@ const props = defineProps({
 })
 
 watch(() => props.updateCode, (newValue, OldValue) => {
+    if (props.formBuilders.length == 0) {
+        return
+    }
+
     code.value = ''
-    props.formBuilders.forEach((formBuilder) => {
-        formBuilder.forEach(formElement => {
-            code.value +=
-                `<div class="container">
+    
+    props.formBuilders.forEach((formElement) => {
+        code.value +=
+            `<div class="container">
     <label for="${formElement.name}"></label>
     ${formElement.generatedNode}
 </div>\n\n`
-        })
     })
-})
+}, { immediate: true })
 
 </script>
 

@@ -29,12 +29,13 @@ function pushAtEnd(input) {
 function updateInputCode(input, formInputIndex, action = 'create') {
     input.generatedNode = input.template
     const prefix = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
-    const inputIdentifier = `${prefix}_${formInputIndex}`
+    // const inputIdentifier = `${prefix}_${formInputIndex}`
+    const inputIdentifier = prefix
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
     input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
     input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
     input.name = inputIdentifier
-    // setTimeout(() => emits('codeUpdated', { input, action, formBuilders })) // wait for formBuilders to get updated
+    setTimeout(() => emits('codeUpdated', { input, action, formBuilders })) // wait for formBuilders to get updated
     return input
 }
 

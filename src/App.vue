@@ -16,7 +16,7 @@ function pushNewInputElement(input) {
 }
 
 const updateCode = ref(0)
-const formBuilders = ref(null)
+const formBuilders = ref([])
 function updatedCode(codeInputMeta) {
     updateCode.value += 1
     formBuilders.value = codeInputMeta.formBuilders

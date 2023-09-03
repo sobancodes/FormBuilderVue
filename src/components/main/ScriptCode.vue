@@ -12,14 +12,13 @@ const formObject = ref({})
 
 watch(() => props.updateCode, (newValue, OldValue) => {
     formObject.value = {}
-    if (props.formBuilders === null) {
+
+    if(props.formBuilders.length == 0) {
         return
     }
 
-    props.formBuilders.forEach((builder) => {
-        builder.forEach((input) => {
-            formObject.value[input.name] = ''
-        })
+    props.formBuilders.forEach((input) => {
+        formObject.value[input.name] = ''
     })
 
     code.value = JSON.stringify(formObject.value, null, 2) // pretty print
