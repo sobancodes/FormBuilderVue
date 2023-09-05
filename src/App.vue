@@ -24,13 +24,21 @@ function updatedCode(codeInputMeta) {
 </script>
 
 <template>
-    <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto p-4">
+    <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto">
+        <header class="lg:mt-40 lg:mb-12 font-roboto">
+            <h1 class="text-4xl text-gray-800 font-extrabold mb-4">Automate your forms, Build quicker</h1>
+            <h3 class="text-base text-gray-400 font-light">
+                With this form builder, you can speed up the boring process of
+                creating your next form. Simply create your form in the form builder below and then just copy and paste
+                code in to your own project. :)
+            </h3>
+        </header>
         <div
-            class="flex w-full min-h-screen xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0 md:items-center">
-            <div class="md:w-1/2 md:flex-none md:px-8 lg:px-12">
+            class="flex w-full min-h-screen xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
+            <div class="md:w-1/2 md:flex-none md:pr-8 lg:pr-12">
                 <CodeTabs :updateCode="updateCode" :formBuilders="formBuilders" />
             </div>
-            <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:px-8 lg:px-12">
+            <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:pl-8 lg:pl-12">
                 <SupportedInputs @onClick="pushNewInputElement" />
                 <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" @codeUpdated="updatedCode" />
             </div>

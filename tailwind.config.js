@@ -8,7 +8,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'fira': ['Fira Sans', 'sans-serif']
+        'fira': ['Fira Sans', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
       },
       screens: {
         'xs-mobile': '250px',
