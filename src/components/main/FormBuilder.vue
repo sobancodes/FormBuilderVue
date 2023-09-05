@@ -29,9 +29,9 @@ const handleLabelUpdate = function (label, { formInput, index }) {
     <!-- hover:border-blue-600 -->
     <div class="formBuilder relative w-full border-2 border-transparent rounded transition-all">
         <!-- row -->
-        <div class="builder-row flex flex-col w-full" v-if="inputs.length >= 1">
+        <div class="builder-row flex w-full flex-wrap -mt-8" v-if="inputs.length >= 1">
             <template v-for="(formInput, index) in inputs" :key="formInputKey">
-                <div class="relative">
+                <div class="relative pt-4 form-builder">
                     <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
                         @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                         <SimpleInput class="w-full" />
@@ -44,8 +44,9 @@ const handleLabelUpdate = function (label, { formInput, index }) {
                         @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
                         <Password class="w-full" />
                     </InputHolder>
+
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-5 h-5 absolute right-3 bottom-3 text-purple-700 cursor-pointer"
+                        stroke="currentColor" class="w-5 h-5 absolute right-3 bottom-3 text-purple-700 cursor-pointer add-same-line"
                         @click="$emit('pushNewInput', index + 1)">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
                     </svg>

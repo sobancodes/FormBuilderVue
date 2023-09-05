@@ -27,14 +27,14 @@ function updatedCode(codeInputMeta) {
     <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto">
         <header class="lg:mt-40 lg:mb-12 font-roboto">
             <h1 class="text-4xl text-gray-800 font-extrabold mb-4">Automate your forms, Build quicker</h1>
-            <h3 class="text-base text-gray-400 font-light">
+            <h3 class="text-sm text-gray-400 font-normal">
                 With this form builder, you can speed up the boring process of
                 creating your next form. Simply create your form in the form builder below and then just copy and paste
                 code in to your own project. :)
             </h3>
         </header>
         <div
-            class="flex w-full min-h-screen xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
+            class="flex w-full xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
             <div class="md:w-1/2 md:flex-none md:pr-8 lg:pr-12">
                 <CodeTabs :updateCode="updateCode" :formBuilders="formBuilders" />
             </div>

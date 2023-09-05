@@ -1,7 +1,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import CodeHighlighter from './CodeHighlighter.vue'
-const code = ref(`// please select inputs`)
+const code = ref(`select inputs to get started`)
 
 const props = defineProps({
     formBuilders: Array,
