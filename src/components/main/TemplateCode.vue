@@ -9,16 +9,19 @@ const props = defineProps({
 })
 
 watch(() => props.updateCode, (newValue, OldValue) => {
-    code.value = ''
+    code.value = '<form>\n'
     props.formBuilders.forEach((formBuilder) => {
+        code.value += ' <div class="builder-row grid grid-cols-2 gap-2 w-full">\n'
         formBuilder.forEach(formElement => {
             code.value +=
-                `<div class="container">
-    <label for="${formElement.name}"></label>
-    ${formElement.generatedNode}
-</div>\n\n`
+                `   <div class="container">
+        <label for="${formElement.name}"></label>
+        ${formElement.generatedNode}
+    </div>\n`
         })
+        code.value += ' </div>'
     })
+    code.value += '\n</form>'
 })
 
 </script>

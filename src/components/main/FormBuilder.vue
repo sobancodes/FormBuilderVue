@@ -24,7 +24,7 @@ const handleLabelUpdate = function (label, { formInput, index }) {
     <!-- hover:border-blue-600 -->
     <div class="formBuilder relative w-full rounded transition-all pb-6 -mt-0 -mx-4 px-4">
         <!-- row -->
-        <div class="builder-row flex flex-wrap w-full" v-if="inputs.length >= 1">
+        <div class="builder-row grid grid-cols-2 gap-2 w-full" v-if="inputs.length >= 1">
             <template v-for="(formInput, index) in inputs" :key="formInput.type">
                 <InputHolder :label="formInput.label" v-if="formInput.type === 'text'"
                     @onLabelUpdate="handleLabelUpdate($event, { formInput, index })">
