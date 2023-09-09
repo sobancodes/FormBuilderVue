@@ -11,37 +11,35 @@ const props = defineProps({
     input: Object,
 })
 
-watch(() => props.pushCounter, () => pushAtEnd(props.input))
+const inputCount = ref(props.pushCounter)
+watch(() => props.pushCounter, () => pushNewInput(formBuilders.length - 1))
 let formBuilders = reactive([[]])
 
 function createNewBuilder(formBuilderIndex) {
+    inputCount.value += 1
     let input = generateInput(props.input)
     input = updateInputCode(input, formBuilderIndex)
     formBuilders.splice(formBuilderIndex + 1, 0, [input])
 }
 
-function pushNewInput(formBuilderIndex) {
-    if (props.input != null) {
-        let input = generateInput(props.input)
-        input = updateInputCode(input, formBuilderIndex, formBuilders[formBuilderIndex].length)
-        console.log(formBuilders[formBuilderIndex])
-        return formBuilders[formBuilderIndex].push(input)
-    }
-
-    pushAtEnd(generateInput())
-}
-
-function pushAtEnd(input) {
-    const length = formBuilders.length
-    const formBuilderIndex = length - 1
+function pushFormInput(input, formBuilderIndex) {
+    inputCount.value += 1
+    input = generateInput(input)
     input = updateInputCode(input, formBuilderIndex, formBuilders[formBuilderIndex].length)
     formBuilders[formBuilderIndex].push(input)
+    return input
 }
 
-function updateInputCode(input, formBuilderIndex, formInputIndex = 0, action = 'create') {
+function pushNewInput(formBuilderIndex) {
+    const input = props.input == null ? generateInput() : props.input
+    pushFormInput(input, formBuilderIndex)
+}
+
+function updateInputCode(input, formBuilderIndex, action = 'create') {
+    console.log(inputCount.value)
     input.generatedNode = input.template
     const prefix = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
-    const inputIdentifier = `${prefix}_${formBuilderIndex}_${formInputIndex}`
+    const inputIdentifier = `${prefix}_${inputCount.value}`
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
     input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
     input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
@@ -60,7 +58,7 @@ function labelUpdated({ formInputLabel, formInputIndex }, formBuilderIndex) {
 <template>
     <div class="flex flex-col">
         <FormBuilder v-for="(formBuilder, index) in formBuilders" :key="index" :formInputs="formBuilder"
-            :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index)"
+            :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index, $event)"
             @onLabelUpdate="labelUpdated($event, index)" />
     </div>
 </template>
