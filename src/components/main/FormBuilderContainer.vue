@@ -18,14 +18,16 @@ let formBuilders = reactive([[]])
 function createNewBuilder(formBuilderIndex) {
     inputCount.value += 1
     let input = generateInput(props.input)
-    input = updateInputCode(input, formBuilderIndex)
+    const sameElCount = sameEl(input)
+    input = updateCode(sameElCount, input, formBuilderIndex)
     formBuilders.splice(formBuilderIndex + 1, 0, [input])
 }
 
 function pushFormInput(input, formBuilderIndex) {
     inputCount.value += 1
     input = generateInput(input)
-    input = updateInputCode(input, formBuilderIndex, formBuilders[formBuilderIndex].length)
+    const sameElCount = sameEl(input)
+    input = updateCode(sameElCount, input, formBuilderIndex)
     formBuilders[formBuilderIndex].push(input)
     return input
 }
@@ -35,11 +37,23 @@ function pushNewInput(formBuilderIndex) {
     pushFormInput(input, formBuilderIndex)
 }
 
-function updateInputCode(input, formBuilderIndex, action = 'create') {
-    console.log(inputCount.value)
+function sameEl(input) {
+    let foundElements = []
+    let foundElementsTotal = 0
+
+    formBuilders.forEach(formBuilder => {
+        foundElements = formBuilder.filter(formEl => formEl.label === input.label)
+        foundElementsTotal += foundElements.length
+    })
+
+    return foundElementsTotal
+}
+
+function updateCode(sameElCount, input, formBuilderIndex, action = 'create') {
     input.generatedNode = input.template
-    const prefix = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
-    const inputIdentifier = `${prefix}_${inputCount.value}`
+    const sanitizedInput = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
+    const inputSuffix = sameElCount !== 0 && sameElCount !== 1 ? '_' + (sameElCount - 1) : ''
+    const inputIdentifier = sanitizedInput + inputSuffix
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
     input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
     input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
@@ -52,8 +66,10 @@ function labelUpdated({ formInputLabel, formInputIndex }, formBuilderIndex) {
     let formBuilder = formBuilders[formBuilderIndex]
     let input = formBuilder[formInputIndex]
     input.label = formInputLabel
-    updateInputCode(input, formBuilderIndex, formInputIndex, 'update')
+    const sameECount = sameEl(input)
+    updateCode(sameECount, input, formBuilderIndex, 'update')
 }
+
 </script>
 <template>
     <div class="flex flex-col">
