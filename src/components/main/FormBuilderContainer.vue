@@ -20,7 +20,7 @@ function createNewBuilder(formBuilderIndex) {
     inputCount.value += 1
     let input = generateInput(props.input)
     const inputName = makeInputName(input.type, input.label, 'create')
-    input = updateCode(checkIfSameName(input), input, formBuilderIndex)
+    input = updateCode(checkIfSameName(inputName), input, formBuilderIndex)
     formBuilderHistory.history[input.name] = input
     formBuilders.splice(formBuilderIndex + 1, 0, [input])
 }
