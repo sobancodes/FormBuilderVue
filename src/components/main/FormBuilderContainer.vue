@@ -45,18 +45,17 @@ function makeInputName(inputType, inputLabel, action = 'create') {
 
 function checkIfSameName(inputName, suffix = -1) {
     let makeSuffix = suffix == -1 ? '' : '_' + suffix
-    console.log(inputName + makeSuffix)
+
     if (inputName + makeSuffix in formBuilderHistory.history) {
-        checkIfSameName(inputName, suffix + 1)
+        return checkIfSameName(inputName, suffix + 1)
     }
-    console.log('suffix', suffix)
+
     return suffix
 }
 
 function updateCode(sameElCount, input, formBuilderIndex, action = 'create') {
     input.generatedNode = input.template
     const inputName = makeInputName(input.type, input.label, action)
-    console.log('same element count', sameElCount)
     const parsedInputName = inputName + (sameElCount !== -1 ? '_' + sameElCount : '')
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
     input.generatedNode = input.generatedNode.replace('##name##', parsedInputName)
@@ -69,6 +68,7 @@ function updateCode(sameElCount, input, formBuilderIndex, action = 'create') {
 function labelUpdate({ formInputLabel, formInputIndex }, formBuilderIndex) {
     let formBuilder = formBuilders[formBuilderIndex]
     let input = formBuilder[formInputIndex]
+    delete formBuilderHistory.history[input.name]
     input.label = formInputLabel
     const inputName = makeInputName(input.type, formInputLabel, 'update')
     updateCode(checkIfSameName(inputName), input, formBuilderIndex, 'update')
