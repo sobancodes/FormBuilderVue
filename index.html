@@ -6,28 +6,10 @@
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FormBuilder</title>
-
-
-  <script>
-    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-
-    // Whenever the user explicitly chooses light mode
-    localStorage.theme = 'light'
-
-    // Whenever the user explicitly chooses dark mode
-    localStorage.theme = 'dark'
-
-    // Whenever the user explicitly chooses to respect the OS preference
-    localStorage.removeItem('theme')
-  </script>
 </head>
 
 <body
-  class="bg-zinc-50 dark:bg-gradient-to-r dark:from-slate-950 dark:from-10% dark:via-stone-950 dark:via-30% dark:to-neutral-900 dark:to-90%">
+  class="bg-zinc-50 dark:bg-gradient-to-r dark:from-stone-900 dark:from-10% dark:via-gray-900 dark:via-30% dark:to-neutral-900 dark:to-80%">
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
 </body>

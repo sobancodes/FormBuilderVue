@@ -4,6 +4,7 @@ import CodeTabs from './components/main/CodeTabs.vue';
 import FormBuilderContainer from './components/main/FormBuilderContainer.vue';
 import SupportedInputs from './components/main/SupportedInputs.vue'
 import { useObject } from './composables/useObject'
+import Toggle from './components/elements/Toggle.vue';
 const { cloneObject } = useObject()
 
 const pushNewInput = ref(0)
@@ -25,12 +26,14 @@ function updatedCode(codeInputMeta) {
 
 <template>
     <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto">
-        <header class="font-roboto h-60 inline-flex flex-col justify-center">
-            <h1 class="text-4xl text-gray-800 font-extrabold mb-4 dark:text-gray-200">Automate your forms, Build quicker
+        <Toggle />
+        <header class="font-roboto h-64 inline-flex flex-col justify-center">
+            <h1 class="text-4xl text-neutral-800 font-light mb-4 dark:text-neutral-200">
+                Build forms, ship faster
             </h1>
-            <h3 class="text-sm text-gray-400 font-normal">
+            <h3 class="text-sm text-neutral-400 font-lighter dark:text-neutral-400">
                 With this form builder, you can speed up the boring process of
-                creating your next form. Simply create your form in the form builder below and then just copy and paste
+                creating your next form. Simply create your form in the form builder below and then just copy pasta
                 code in to your own project
             </h3>
         </header>

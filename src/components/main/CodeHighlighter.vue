@@ -14,5 +14,6 @@ defineProps({
 <style>
 .hljs {
     border-radius: 5px !important;
+    max-height: 500px;
 }
 </style>

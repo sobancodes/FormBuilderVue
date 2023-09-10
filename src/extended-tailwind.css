@@ -7,7 +7,7 @@
 }
 
 ._default_inputs {
-    @apply mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-2 placeholder:text-gray-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600
+    @apply mb-4 w-full text-sm shadow-sm border rounded-md px-3 py-2 placeholder:text-neutral-300 placeholder:text-sm focus:outline-8 focus:outline-blue-600 dark:border-neutral-800 dark:bg-neutral-800 dark:placeholder:text-neutral-500
 }
 
 ._tab_active {
