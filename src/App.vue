@@ -29,12 +29,12 @@ function updatedCode(codeInputMeta) {
         <Toggle />
         <header class="font-roboto h-64 inline-flex flex-col justify-center">
             <h1 class="text-4xl text-neutral-800 font-light mb-4 dark:text-neutral-200">
-                Build forms, ship faster
+                Build forms, ship faster &#128640;
             </h1>
             <h3 class="text-sm text-neutral-400 font-lighter dark:text-neutral-400">
                 With this form builder, you can speed up the boring process of
                 creating your next form. Simply create your form in the form builder below and then just copy pasta
-                code in to your own project
+                code in to your own project &#128578;
             </h3>
         </header>
         <div class="pb-8 flex w-full xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
