@@ -11,5 +11,5 @@
 }
 
 ._tab_active {
-    @apply bg-white shadow-sm
+    @apply bg-white shadow-sm dark:bg-neutral-700
 }

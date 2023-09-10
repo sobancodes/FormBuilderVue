@@ -60,7 +60,7 @@ const handleLabelUpdate = function (label, { formInput, index }) {
 
 
         <button
-            class="bg-purple-50 text-purple-700 font-light rounded-md -mt-0 px-4 py-2 flex items-center space-x-1 cursor-pointer"
+            class="bg-purple-50 text-purple-700 font-light rounded-md -mt-0 px-4 py-2 flex items-center space-x-1 cursor-pointer dark:bg-neutral-800 dark:text-neutral-200"
             @click="$emit('pushNewInput')" v-else>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                 class="w-5 h-5">
