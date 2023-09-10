@@ -14,22 +14,24 @@ const props = defineProps({
 const inputCount = ref(props.pushCounter)
 watch(() => props.pushCounter, () => pushNewInput(formBuilders.length - 1))
 let formBuilders = reactive([[]])
+let formBuilderHistory = reactive({ history: {} })
 
 function createNewBuilder(formBuilderIndex) {
     inputCount.value += 1
     let input = generateInput(props.input)
-    const sameElCount = sameEl(input)
-    input = updateCode(sameElCount, input, formBuilderIndex)
+    const inputName = makeInputName(input.type, input.label, 'create')
+    input = updateCode(checkIfSameName(input), input, formBuilderIndex)
+    formBuilderHistory.history[input.name] = input
     formBuilders.splice(formBuilderIndex + 1, 0, [input])
 }
 
 function pushFormInput(input, formBuilderIndex) {
     inputCount.value += 1
     input = generateInput(input)
-    const sameElCount = sameEl(input)
-    input = updateCode(sameElCount, input, formBuilderIndex)
+    const inputName = makeInputName(input.type, input.label, 'create')
+    input = updateCode(checkIfSameName(inputName), input, formBuilderIndex)
+    formBuilderHistory.history[input.name] = input
     formBuilders[formBuilderIndex].push(input)
-    return input
 }
 
 function pushNewInput(formBuilderIndex) {
@@ -37,44 +39,47 @@ function pushNewInput(formBuilderIndex) {
     pushFormInput(input, formBuilderIndex)
 }
 
-function sameEl(input) {
-    let foundElements = []
-    let foundElementsTotal = 0
+function makeInputName(inputType, inputLabel, action = 'create') {
+    return action === 'create' ? inputType : inputLabel.replaceAll(' ', '_').toLowerCase()
+}
 
-    formBuilders.forEach(formBuilder => {
-        foundElements = formBuilder.filter(formEl => formEl.label === input.label)
-        foundElementsTotal += foundElements.length
-    })
-
-    return foundElementsTotal
+function checkIfSameName(inputName, suffix = -1) {
+    let makeSuffix = suffix == -1 ? '' : '_' + suffix
+    console.log(inputName + makeSuffix)
+    if (inputName + makeSuffix in formBuilderHistory.history) {
+        checkIfSameName(inputName, suffix + 1)
+    }
+    console.log('suffix', suffix)
+    return suffix
 }
 
 function updateCode(sameElCount, input, formBuilderIndex, action = 'create') {
     input.generatedNode = input.template
-    const sanitizedInput = action === 'create' ? input.type : input.label.replaceAll(' ', '_').toLowerCase()
-    const inputSuffix = sameElCount !== 0 && sameElCount !== 1 ? '_' + (sameElCount - 1) : ''
-    const inputIdentifier = sanitizedInput + inputSuffix
+    const inputName = makeInputName(input.type, input.label, action)
+    console.log('same element count', sameElCount)
+    const parsedInputName = inputName + (sameElCount !== -1 ? '_' + sameElCount : '')
     input.generatedNode = input.generatedNode.replace('##placeholder##', `'${input.label}'`)
-    input.generatedNode = input.generatedNode.replace('##name##', `'${inputIdentifier}'`)
-    input.generatedNode = input.generatedNode.replace('##vmodel##', `'${inputIdentifier}'`)
-    input.name = inputIdentifier
+    input.generatedNode = input.generatedNode.replace('##name##', parsedInputName)
+    input.generatedNode = input.generatedNode.replace('##vmodel##', parsedInputName)
+    input.name = parsedInputName
     setTimeout(() => emits('codeUpdated', { input, formBuilderIndex, action, formBuilders })) // wait for formBuilders to get updated
     return input
 }
 
-function labelUpdated({ formInputLabel, formInputIndex }, formBuilderIndex) {
+function labelUpdate({ formInputLabel, formInputIndex }, formBuilderIndex) {
     let formBuilder = formBuilders[formBuilderIndex]
     let input = formBuilder[formInputIndex]
     input.label = formInputLabel
-    const sameECount = sameEl(input)
-    updateCode(sameECount, input, formBuilderIndex, 'update')
+    const inputName = makeInputName(input.type, formInputLabel, 'update')
+    updateCode(checkIfSameName(inputName), input, formBuilderIndex, 'update')
+    formBuilderHistory.history[input.name] = input
 }
-
 </script>
+
 <template>
     <div class="flex flex-col">
         <FormBuilder v-for="(formBuilder, index) in formBuilders" :key="index" :formInputs="formBuilder"
-            :pushCounter="pushCounter" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index, $event)"
-            @onLabelUpdate="labelUpdated($event, index)" />
+            :pushCounter="inputCount" @pushNewBuilder="createNewBuilder(index)" @pushNewInput="pushNewInput(index, $event)"
+            @onLabelUpdate="labelUpdate($event, index)" />
     </div>
 </template>
