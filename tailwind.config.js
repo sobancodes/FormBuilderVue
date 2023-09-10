@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   content: [],
   theme: {
@@ -8,7 +9,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        'fira': ['Fira Sans', 'sans-serif']
+        'fira': ['Fira Sans', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
       },
       screens: {
         'xs-mobile': '250px',

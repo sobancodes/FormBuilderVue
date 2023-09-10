@@ -15,7 +15,13 @@ import 'highlight.js/lib/common'
 import hljsVuePlugin from "@highlightjs/vue-plugin"
 import 'highlight.js/styles/atom-one-dark.css'
 
-createApp(App)
-    .use(hljsVuePlugin)
-    .use(createPinia())
-    .mount('#app')
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+const app = createApp(App)
+app.use(hljsVuePlugin)
+app.use(VueSweetalert2)
+app.use(createPinia())
+app.mount('#app')
+
+window.Swal = app.config.globalProperties.$swal

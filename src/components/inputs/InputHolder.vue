@@ -38,14 +38,14 @@ const onceLabelUpdates = function (e) {
 
 <template>
     <div class="p-1 space-y-1 w-full label-container">
-        <label class="relative">
+        <label class="relative dark:text-neutral-400">
             {{ label }}
             <span @click="showUpdateInput"
-                class="font-bold cursor-pointer label-edit-icon text-base absolute -translate-y-1/2 top-1/2 right-[-20px] text-blue-600 material-symbols-outlined animate__animated animate__fadeIn animate__fastest">
+                class="font-bold cursor-pointer label-edit-icon text-base absolute -translate-y-1/2 top-1/2 right-[-20px] text-indigo-700 material-symbols-outlined animate__animated animate__fadeIn animate__fastest dark:text-gray-700">
                 edit
             </span>
             <div class="hidden update-input-holder absolute left-0 top-[-0.3rem] rounded space-x-1">
-                <input v-model="newLabel" class="outline-none" type="text">
+                <input v-model="newLabel" class="outline-none dark:bg-neutral-950 rounded-lg" type="text">
                 <span @click="onceLabelUpdates"
                     class="cursor-pointer material-symbols-outlined items-center text-green-600 text-lg font-bold">
                     done

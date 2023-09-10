@@ -4,6 +4,7 @@ import CodeTabs from './components/main/CodeTabs.vue';
 import FormBuilderContainer from './components/main/FormBuilderContainer.vue';
 import SupportedInputs from './components/main/SupportedInputs.vue'
 import { useObject } from './composables/useObject'
+import Toggle from './components/elements/Toggle.vue';
 const { cloneObject } = useObject()
 
 const pushNewInput = ref(0)
@@ -16,7 +17,7 @@ function pushNewInputElement(input) {
 }
 
 const updateCode = ref(0)
-const formBuilders = ref(null)
+const formBuilders = ref([])
 function updatedCode(codeInputMeta) {
     updateCode.value += 1
     formBuilders.value = codeInputMeta.formBuilders
@@ -24,13 +25,23 @@ function updatedCode(codeInputMeta) {
 </script>
 
 <template>
-    <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto p-4">
-        <div
-            class="flex w-full min-h-screen xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0 md:items-center">
-            <div class="md:w-1/2 md:flex-none md:px-8 lg:px-12">
+    <div class="font-fira xs-mobile:max-w-md md:max-w-5xl mx-auto">
+        <Toggle />
+        <header class="font-roboto h-64 inline-flex flex-col justify-center">
+            <h1 class="text-4xl text-neutral-800 font-light mb-4 dark:text-neutral-200">
+                Build forms, ship faster &#128640;
+            </h1>
+            <h3 class="text-sm text-neutral-400 font-lighter dark:text-neutral-400">
+                With this form builder, you can speed up the boring process of
+                creating your next form. Simply create your form in the form builder below and then just copy pasta
+                code in to your own project &#128578;
+            </h3>
+        </header>
+        <div class="pb-8 flex w-full xs-mobile:space-y-12 md:space-y-0 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
+            <div class="md:w-1/2 md:flex-none md:pr-8 lg:pr-12">
                 <CodeTabs :updateCode="updateCode" :formBuilders="formBuilders" />
             </div>
-            <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:px-8 lg:px-12">
+            <div class="md:w-1/2 md:flex-none xs-mobile:py-8 md:py-0 md:pl-8 lg:pl-12">
                 <SupportedInputs @onClick="pushNewInputElement" />
                 <FormBuilderContainer :pushCounter="pushNewInput" :input="newInput" @codeUpdated="updatedCode" />
             </div>
