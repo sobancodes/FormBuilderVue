@@ -37,7 +37,7 @@ function updatedCode(codeInputMeta) {
                 code in to your own project &#128578;
             </h3>
         </header>
-        <div class="pb-8 flex w-full xs-mobile:space-y-12 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
+        <div class="pb-8 flex w-full xs-mobile:space-y-12 md:space-y-0 xs-mobile:flex-col xs-mobile:divide-y md:flex-row md:divide-y-0">
             <div class="md:w-1/2 md:flex-none md:pr-8 lg:pr-12">
                 <CodeTabs :updateCode="updateCode" :formBuilders="formBuilders" />
             </div>

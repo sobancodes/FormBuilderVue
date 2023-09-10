@@ -8,7 +8,7 @@ formInputs = [formInputs.text, formInputs.email, formInputs.password]
 
 <template>
     <!-- Heading -->
-    <h2 class="font-bold text-3xl text-neutral-700 xs-mobile:font-semibold xs-mobile:text-base dark:text-neutral-300">
+    <h2 class="text-3xl text-neutral-700 xs-mobile:font-light xs-mobile:text-base dark:text-neutral-300">
         Form Inputs
     </h2>
     <!-- Form inputs -->

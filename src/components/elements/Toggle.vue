@@ -31,12 +31,12 @@ function toggleMode() {
 <template>
     <div class="fixed top-5 right-5">
         <button type="button" @click="toggleMode"
-            class="bg-slate-200 dark:bg-slate-800 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+            class="bg-slate-200 dark:bg-neutral-700 relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-neutral-600 focus:ring-offset-2"
             role="switch" aria-checked="false">
             <span class="sr-only">Use setting</span>
             <!-- Enabled: "translate-x-5", Not Enabled: "translate-x-0" -->
             <span :class="[mode === 'light' ? 'translate-x-5' : 'translate-x-0']"
-                class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white dark:bg-black shadow ring-0 transition duration-200 ease-in-out">
+                class="translate-x-0 pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white dark:bg-neutral-800 shadow ring-0 transition duration-200 ease-in-out">
                 <!-- Enabled: "opacity-0 duration-100 ease-out", Not Enabled: "opacity-100 duration-200 ease-in" -->
                 <span v-if="mode === 'dark'"
                     class="opacity-100 duration-200 ease-in absolute inset-0 flex h-full w-full items-center justify-center transition-opacity"
@@ -55,7 +55,7 @@ function toggleMode() {
                     :class="[mode === 'dark' ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in']"
                     aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="h-3 w-3 text-gray-900">
+                        stroke="currentColor" class="h-3 w-3 text-black">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
                     </svg>
